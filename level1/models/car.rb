@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 class Car
   attr_accessor :id
   attr_reader :price_per_day, :price_per_km

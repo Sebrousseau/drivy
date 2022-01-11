@@ -4,6 +4,17 @@ def com(price)
   price - price * 0.7
 end
 
+def inssurance_fee(rent)
+  com(decreases_price(rent)).to_i / 2
+end
+
+def assistance_fee(rent)
+  rent.number_of_days * 100
+end
+
+def drivy_fee(rent)
+  com(decreases_price(rent)).to_i / 2 - rent.number_of_days * 100
+end
 
 rents = []
 filepath = 'level3/data/input.json'
@@ -23,9 +34,9 @@ rents.each do |rent|
     id: rent.id,
     price: decreases_price(rent),
     commission: {
-      insurance_fee: com(decreases_price(rent)).to_i / 2,
-      assistance_fee: rent.number_of_days * 100,
-      drivy_fee: com(decreases_price(rent)).to_i / 2 - rent.number_of_days * 100
+      insurance_fee: inssurance_fee(rent),
+      assistance_fee: assistance_fee(rent),
+      drivy_fee: drivy_fee(rent)
     }
   }
 end
