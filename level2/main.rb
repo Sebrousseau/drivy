@@ -37,7 +37,8 @@ filepath = 'level2/data/input.json'
 input = JSON.parse(File.read(filepath))
 
 input['rentals'].each do |rental|
-  rents << Rental.new(id: rental['id'], car_id: rental['car_id'], start_date: rental['start_date'], end_date: rental['end_date'], distance: rental['distance'])
+  rents << Rental.new(id: rental['id'], car_id: rental['car_id'], start_date: rental['start_date'],
+                      end_date: rental['end_date'], distance: rental['distance'])
 end
 
 store_path = 'level2/data/output.json'
@@ -52,5 +53,5 @@ rents.each do |rent|
 end
 
 File.open(store_path, 'wb') do |file|
-  file.write(JSON.generate(rentals))
+  file.write(JSON.pretty_generate(rentals))
 end

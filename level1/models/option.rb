@@ -8,7 +8,6 @@ class Option
     @type = attributes[:type]
   end
 
-  OPTIONS_PRICES = { 'owner':[{ 'gps': 5,'baby_seat': 2 }],
-                 'Getaround':[{ 'additional_insurance': 10 }]
-                   }
+  OPTIONS_PRICES = { 'owner': [{ 'gps': 5, 'baby_seat': 2 }],
+                     'Getaround': [{ 'additional_insurance': 10 }] }
 end
