@@ -3,7 +3,6 @@ require_relative '../level1/models/option'
 require 'pry-byebug'
 def additional_opt(option, rent)
   additional = { owner: 0, drivy: 0 }
-
   case option.type
   when 'gps'
     additional[:owner] = 500 * rent.number_of_days
@@ -15,22 +14,14 @@ def additional_opt(option, rent)
   additional
 end
 
-rents = []
 options = []
 filepath = 'level5/data/input.json'
-
 input = JSON.parse(File.read(filepath))
-
-input['rentals'].each do |rental|
-  rents << Rental.new(id: rental['id'], car_id: rental['car_id'], start_date: rental['start_date'],
-                      end_date: rental['end_date'], distance: rental['distance'])
-end
+rents = parse_rentals(input)
 
 input['options'].each do |option|
   options << Option.new(id: option['id'], rental_id: option['rental_id'], type: option['type'])
 end
-
-store_path = 'level5/data/output.json'
 
 rentals = { rentals: [] }
 
@@ -54,6 +45,5 @@ rents.each do |rent|
   }
 end
 
-File.open(store_path, 'wb') do |file|
-  file.write(JSON.pretty_generate(rentals))
-end
+store_path = 'level5/data/output.json'
+store_json(store_path, rentals)

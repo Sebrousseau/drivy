@@ -1,7 +1,7 @@
 require_relative '../level2/main'
 
 def com(price)
-  price - price * 0.7
+  price * 0.3
 end
 
 def inssurance_fee(rent)
@@ -13,20 +13,12 @@ def assistance_fee(rent)
 end
 
 def drivy_fee(rent)
-  com(decreases_price(rent)).to_i / 2 - rent.number_of_days * 100
+  inssurance_fee(rent) - assistance_fee(rent)
 end
 
-rents = []
 filepath = 'level3/data/input.json'
-
 input = JSON.parse(File.read(filepath))
-
-input['rentals'].each do |rental|
-  rents << Rental.new(id: rental['id'], car_id: rental['car_id'], start_date: rental['start_date'],
-                      end_date: rental['end_date'], distance: rental['distance'])
-end
-
-store_path = 'level3/data/output.json'
+rents = parse_rentals(input)
 
 rentals = { rentals: [] }
 
@@ -42,6 +34,5 @@ rents.each do |rent|
   }
 end
 
-File.open(store_path, 'wb') do |file|
-  file.write(JSON.pretty_generate(rentals))
-end
+store_path = 'level3/data/output.json'
+store_json(store_path, rentals)

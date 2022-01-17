@@ -1,6 +1,5 @@
 class Car
-  attr_accessor :id
-  attr_reader :price_per_day, :price_per_km
+  attr_reader :price_per_day, :price_per_km, :id
 
   def initialize(attributes = {})
     @price_per_day = attributes[:price_per_day]

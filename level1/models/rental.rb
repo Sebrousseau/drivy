@@ -1,6 +1,5 @@
 class Rental
-  attr_accessor :id
-  attr_reader :start_date, :end_date, :distance, :car_id
+  attr_reader :start_date, :end_date, :distance, :car_id, :id
 
   def initialize(attributes = {})
     @start_date = attributes[:start_date]

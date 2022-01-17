@@ -1,16 +1,8 @@
 require_relative '../level3/main'
 
-rents = []
 filepath = 'level4/data/input.json'
-
 input = JSON.parse(File.read(filepath))
-
-input['rentals'].each do |rental|
-  rents << Rental.new(id: rental['id'], car_id: rental['car_id'], start_date: rental['start_date'],
-                      end_date: rental['end_date'], distance: rental['distance'])
-end
-
-store_path = 'level4/data/output.json'
+rents = parse_rentals(input)
 
 rentals = { rentals: [] }
 
@@ -27,6 +19,5 @@ rents.each do |rent|
   }
 end
 
-File.open(store_path, 'wb') do |file|
-  file.write(JSON.pretty_generate(rentals))
-end
+store_path = 'level4/data/output.json'
+store_json(store_path, rentals)
